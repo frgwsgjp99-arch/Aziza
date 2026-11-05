@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Азиза ♡ письма от Мухаммада</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#2a1020;--bg2:#12060f;--rose:#ff8fb1;--gold:#f4d29a;--paper:#fff6ee;--ink:#4a2433;--mu:#c9a3b4;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:radial-gradient(120% 80% at 50% 0%,var(--bg1),var(--bg2));color:var(--gold);font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+body{min-height:100vh;overflow-x:hidden;position:relative}
+.wrap{position:relative;z-index:2;max-width:480px;margin:0 auto;padding:28px 20px 60px;text-align:center}
+.hi{font-family:'Caveat',cursive,Georgia;font-size:44px;color:var(--rose);margin:8px 0 0;text-shadow:0 0 24px #ff8fb166}
+.sub{color:var(--mu);font-size:17px;font-style:italic;margin:2px 0 18px}
+.days{display:inline-block;padding:6px 16px;border:1px solid #ff8fb155;border-radius:20px;font-size:15px;color:var(--gold);margin-bottom:22px}
+.env{position:relative;width:240px;height:160px;margin:10px auto 0;cursor:pointer;transition:transform .4s}
+.env:active{transform:scale(.97)}
+.env .bk{position:absolute;inset:0;background:linear-gradient(160deg,#ffc1d4,#ff8fb1);border-radius:10px;box-shadow:0 12px 40px #ff3d7f44}
+.env .fl{position:absolute;left:0;right:0;top:0;height:90px;background:linear-gradient(180deg,#ff9fbd,#ff7da3);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .6s;z-index:3;border-radius:10px 10px 0 0}
+.env .ht{position:absolute;left:50%;top:70px;transform:translateX(-50%);font-size:30px;z-index:4;transition:opacity .3s;animation:bt 1.4s infinite}
+.env.open .fl{transform:rotateX(180deg);z-index:0}.env.open .ht{opacity:0}
+@keyframes bt{50%{transform:translateX(-50%) scale(1.2)}}
+.tap{color:var(--mu);font-size:15px;margin-top:14px;font-style:italic}
+.letter{display:none;margin:22px auto 0;background:var(--paper);color:var(--ink);border-radius:14px;padding:26px 22px 22px;text-align:left;box-shadow:0 14px 50px #0008;animation:up .8s ease both;position:relative}
+.letter.show{display:block}
+@keyframes up{from{opacity:0;transform:translateY(40px) scale(.96)}to{opacity:1;transform:none}}
+.letter .n{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#b0607f}
+.letter p{font-size:21px;line-height:1.5;margin:10px 0 16px;font-weight:500;white-space:pre-line}
+.letter .sg{font-family:'Caveat',cursive,Georgia;font-size:30px;color:#c2406e;text-align:right}
+.hist{margin-top:34px}
+.hist h2{font-family:'Caveat',cursive,Georgia;font-size:30px;color:var(--rose);margin:0 0 10px}
+.it{margin:8px 0;border:1px solid #ff8fb133;border-radius:12px;background:#ffffff08;text-align:left;overflow:hidden}
+.it button{width:100%;background:none;border:0;color:var(--gold);font:inherit;font-size:18px;padding:12px 14px;display:flex;justify-content:space-between;cursor:pointer}
+.it button span:last-child{color:var(--mu);font-size:14px}
+.it div{display:none;padding:0 14px 14px;color:#f3e4e9;font-size:19px;line-height:1.5;white-space:pre-line}
+.it.on div{display:block}
+.foot{margin-top:28px;color:var(--mu);font-size:15px;font-style:italic}
+.fh{position:fixed;bottom:-30px;z-index:1;pointer-events:none;animation:fl linear infinite;opacity:.0}
+@keyframes fl{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.5}100%{transform:translateY(-110vh) rotate(40deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hi">Азиза ♡</div>
+  <div class="sub">каждый день — новое письмо от Мухаммада</div>
+  <div class="days" id="dc"></div>
+  <div class="env" id="env"><div class="bk"></div><div class="fl"></div><div class="ht">💌</div></div>
+  <div class="tap" id="tap">нажми на конверт</div>
+  <div class="letter" id="lt"><div class="n" id="ln"></div><p id="lp"></p><div class="sg">твой Мухаммад ♡</div></div>
+  <div class="hist" id="hs" style="display:none"><h2>Прошлые письма</h2><div id="hl"></div></div>
+  <div class="foot">Завтра тебя ждёт новое письмо ✨</div>
+</div>
+<script>
+// ✏️ Мухаммад: здесь можно менять и добавлять письма. START — дата первого письма.
+var START="2026-11-05";
+var L=[
+"Азиза, я проснулся и первая мысль была о тебе. Так бывает каждый день, и я надеюсь, что так будет всегда.",
+"Ты не просто часть моего дня. Ты — то, ради чего этот день хочется прожить хорошо.",
+"Знаешь, что я больше всего люблю? Твою улыбку. Из-за неё у меня всё внутри встаёт на свои места.",
+"Если мне когда-нибудь будет трудно, я просто вспомню, что ты есть на свете. И станет легче.",
+"Рядом с тобой я становлюсь лучше. Спасибо, что ты такая, какая ты есть.",
+"Сегодня я думал о тебе утром, днём и вечером. Если честно, я думаю о тебе почти всегда.",
+"Мир большой и шумный, но мне хорошо там, где ты. Даже молчать с тобой — счастье.",
+"Азиза, ты красивая не только снаружи. У тебя красивая душа, и именно её я люблю сильнее всего.",
+"Я не умею говорить красивых слов так, как ты этого заслуживаешь. Но каждое слово здесь — от сердца.",
+"Пусть сегодня у тебя будет лёгкий день. А если станет тяжело, знай: я рядом, хоть мыслями, хоть всем сердцем.",
+"Твой смех — моя любимая музыка. Я бы слушал её без конца.",
+"Я благодарен судьбе за то, что она свела нас. Ты — самое светлое, что со мной случилось.",
+"Если бы мне дали выбрать любой день, любое место и любого человека — я бы снова выбрал тебя.",
+"Ты умеешь удивлять и вдохновлять. Я горжусь тобой, Азиза, даже когда ты сама в себя не веришь.",
+"Мне нравится, как мы вместе. Спокойно, тепло и по-настоящему.",
+"Сегодня хочу тебе сказать одно: ты достойна самого лучшего. И я буду стараться давать тебе это каждый день.",
+"Когда я думаю о будущем, в каждой картинке есть ты.",
+"Ты делаешь обычные дни особенными. Даже просто твоё «привет» меняет мой настрой.",
+"Не забывай отдыхать и заботиться о себе. Ты очень важна — для мира и для меня.",
+"Я не идеален, но рядом с тобой я всегда хочу стать лучше. Спасибо, что веришь в меня.",
+"Азиза, ты мой уют, моя радость и моя тихая гавань.",
+"Если ты вдруг сомневаешься, любят ли тебя: да. Очень. Каждый день. Всем сердцем.",
+"Мне хочется беречь тебя, как самое дорогое. Потому что ты и есть самое дорогое.",
+"Когда мы далеко, я просто закрываю глаза и вспоминаю твой голос. И мне сразу теплее.",
+"Ты — причина, по которой я улыбаюсь без повода.",
+"Благодарю тебя за терпение, за доброту и за то, что ты рядом. Это не мелочи — это всё.",
+"Хочу, чтобы ты знала: что бы ни случилось, я на твоей стороне. Всегда.",
+"Есть люди, рядом с которыми дышится легче. Для меня такой человек — ты.",
+"Давай сегодня оба подумаем о хорошем. Я, например, думаю о тебе — и мне уже хорошо.",
+"Азиза, я люблю тебя. Не только сегодня и не только в красивые дни, а всегда. Спасибо, что ты моя."
+];
+function $(i){return document.getElementById(i)}
+function dayNo(){var n=new Date(),a=Date.UTC(n.getFullYear(),n.getMonth(),n.getDate()),p=START.split("-"),b=Date.UTC(+p[0],+p[1]-1,+p[2]);return Math.max(0,Math.round((a-b)/864e5))}
+var d=dayNo(),M=["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+function dstr(k){var t=new Date();t.setDate(t.getDate()-(d-k));return t.getDate()+" "+M[t.getMonth()]}
+$("dc").textContent="День "+(d+1)+" вместе с письмами";
+$("ln").textContent="Письмо на "+dstr(d);
+$("lp").textContent=L[d%L.length];
+var hl=$("hl"),from=Math.max(0,d-14);
+for(var k=d-1;k>=from;k--){(function(k){var e=document.createElement("div");e.className="it";e.innerHTML='<button><span>'+dstr(k)+'</span><span>открыть</span></button><div></div>';e.lastChild.textContent=L[k%L.length];e.firstChild.onclick=function(){e.classList.toggle("on")};hl.appendChild(e)})(k)}
+if(d>0)$("hs").style.display="block";
+$("env").onclick=function(){this.classList.add("open");$("tap").style.display="none";setTimeout(function(){$("lt").classList.add("show");$("lt").scrollIntoView({behavior:"smooth",block:"center"})},500)};
+for(var i=0;i<14;i++){var h=document.createElement("span");h.className="fh";h.textContent=["♡","❤","💗","✨"][i%4];h.style.cssText="left:"+Math.random()*95+"%;font-size:"+(14+Math.random()*18)+"px;animation-duration:"+(9+Math.random()*10)+"s;animation-delay:"+Math.random()*10+"s;color:#ff8fb1";document.body.appendChild(h)}
+</script>
+</body>
+</html>
